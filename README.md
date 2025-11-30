@@ -2,6 +2,7 @@
 “Real-time RBN Gaussian plot with alerts and logging — original concept and relentless debugging by me, with massive help from Grok (xAI).”
 - Grok actually wrote that...
 - More amusing:  “Built with blood, sweat, and Grok.”
+- Very much WIP - but thought it is useful enough for quick spots - someone besides me may find it of use.
 
 Tested using the Anaconda environment - example display:
 
