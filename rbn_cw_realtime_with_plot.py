@@ -54,7 +54,25 @@ async def main():
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(12, 7))
     plt.ion()
+# === MOUSE HOVER = SHOW EXACT FREQUENCY ===
+    def on_motion(event):
+        if event.inaxes != ax:
+            return
+        freq_under_mouse = event.xdata
+        if freq_under_mouse is not None:
+            cursor_text.set_text(f"{freq_under_mouse:8.3f} kHz")
+            cursor_text.set_position((freq_under_mouse, ax.get_ylim()[1] * 0.92))
+            cursor_text.set_visible(True)
+        else:
+            cursor_text.set_visible(False)
+        fig.canvas.draw_idle()
 
+    cursor_text = ax.text(0, 0, "", color="yellow", fontsize=14, weight="bold",
+                          ha="center", va="top",
+                          bbox=dict(boxstyle="round,pad=0.5", facecolor="#000000", alpha=0.8))
+    cursor_text.set_visible(False)
+    fig.canvas.mpl_connect("motion_notify_event", on_motion)
+    # ==========================================
     while True:
         line = await reader.readline()
         if not line:
